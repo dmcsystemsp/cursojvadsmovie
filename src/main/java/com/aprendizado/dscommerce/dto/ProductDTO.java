@@ -2,13 +2,19 @@ package com.aprendizado.dscommerce.dto;
 
 import com.aprendizado.dscommerce.entities.Product;
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.*;
 
 public class ProductDTO {
 
     private Long id;
+    @NotBlank(message = "Campo requerido")
+    @Size(min = 3, max = 80, message = "Nome precisa de 3 a 80 Caracteres")
     private String name;
+    @NotBlank(message = "Campo requerido")
+    @Size(min = 10, message = "Descrição deve ter no mínino 3 Caracteres")
     private String description;
-    private Double Price;
+    @Positive(message = "O Preço deve ser positivo!")
+    private Double price;
     private String imgUrl;
 
     public ProductDTO(){
@@ -19,7 +25,7 @@ public class ProductDTO {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.Price = price;
+        this.price = price;
         this.imgUrl = imgUrl;
     }
 
@@ -27,7 +33,7 @@ public class ProductDTO {
         id = entity.getId();
         name = entity.getName();
         description = entity.getDescription();
-        Price = entity.getPrice();
+        price = entity.getPrice();
         imgUrl = entity.getImgUrl();
     }
 
@@ -45,7 +51,7 @@ public class ProductDTO {
     }
 
     public Double getPrice() {
-        return Price;
+        return price;
     }
 
     public String getImgUrl() {
